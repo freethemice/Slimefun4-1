@@ -197,6 +197,18 @@ public class SlimefunCommand implements CommandExecutor, Listener {
 				}
 			}
 			else if (args[0].equalsIgnoreCase("give")) {
+				if (args.length > 2) {
+					if (args[2].equalsIgnoreCase("random")) {
+						Random random = new Random(System.currentTimeMillis());
+						int item = random.nextInt(Slimefun.listIDs().size());
+						while(SlimefunItem.getByID(Slimefun.listIDs().get(item)).getCategory() == Categories.MACHINES_1)
+						{
+							item = random.nextInt(Slimefun.listIDs().size());
+						}
+						args[2] = Slimefun.listIDs().get(item);
+
+					}
+				}				
 			    if (sender.hasPermission("slimefun.cheat.items") || !(sender instanceof Player)) {
 			        if (args.length == 3) {
 						if (Players.isOnline(args[1])) {
